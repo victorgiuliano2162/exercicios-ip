@@ -23,7 +23,17 @@ def menu():
     
     while validador:
         
-        entrada = int(input("Selecione a operação desejada: \n1 -> Adicionar aluno \n2 -> Editar informações do aluno \n3 -> Remover aluno \n4 -> Relatório dos alunos aprovados \n5 -> Filtar por Reprovados por falta \n6 -> Filtrar pro reprovados por nota \n7 -> Situação geral: \n0 -> Sair do programa:\n"))
+        entrada = int(input('''
+        Selecione a operação desejada:
+            1 -> Adicionar aluno
+            2 -> Editar informações do aluno
+            3 -> Remover aluno
+            4 -> Relatório dos alunos aprovados
+            5 -> Filtar por Reprovados por falta
+            6 -> Filtrar pro reprovados por nota
+            7 -> Situação geral
+            0 -> Sair do programa
+            '''))
         
         if entrada == 1:
             adicionar_aluno()
