@@ -15,32 +15,31 @@ Luiz - nota: 6.2 / frequência: 60 aulas - (Reprovado por nota)
 '''
 
 #aluno, notas(4), requencia
-alunos:dict = {}  
-dicio:dict = {"Carlos": "Kawasaki"}
-        
+alunos:dict = {}
+aluno_info = []
+
 def menu():
-    entrada = int(input("Selecione a operação desejada: \n1 -> Adicionar aluno \n2 -> Editar informações do aluno \n3 -> Remover aluno \n4 -> Adicionar notas a aluno \n5 -> Adicionar frequência a aluno \n6 -> Relatório dos alunos aprovados \n7 -> Filtar por Reprovados por falta \n8 -> Filtrar pro reprovados por nota \n9 -> Sair do programa:\n"))
-    
-    validador: bool = True
+    validador = True        
     
     while validador:
+        
+        entrada = int(input("Selecione a operação desejada: \n1 -> Adicionar aluno \n2 -> Editar informações do aluno \n3 -> Remover aluno \n4 -> Relatório dos alunos aprovados \n5 -> Filtar por Reprovados por falta \n6 -> Filtrar pro reprovados por nota \n7 -> Situação geral: \n0 -> Sair do programa:\n"))
+        
         if entrada == 1:
             adicionar_aluno()
         elif entrada == 2:
-            adicionar_aluno()
+            editar_aluno()
         elif entrada == 3:
-            adicionar_aluno()
+            remover_aluno()
         elif entrada == 4:
-            adicionar_aluno()
+            gerar_relatorio_aprovados()
         elif entrada == 5:
-            adicionar_aluno()
+            reprovados_falta()
         elif entrada == 6:
-            adicionar_aluno()
+            reprovados_nota()
         elif entrada == 7:
-            adicionar_aluno()
-        elif entrada == 8:
-            adicionar_aluno()
-        elif entrada == 9:
+            situacao_geral()
+        elif entrada == 0:
             validador = False
             print("Até breve")
         
@@ -51,15 +50,20 @@ def notas_media(lista):
     return total
 
 def calc_media(lista):
-    media = sum_nota(lista_notas) / (len(lista_notas))
+    media = sum_nota(lista) / (len(lista))
     return media
+
+def sum_nota(l: list):
+    accum = 0
+    for item in l:
+        accum += item  
+    return accum
 
 def adicionar_aluno():
     aluno_nota: list = []
     nota = 0
     cont = 0
     nome = input("Informe o nome do aluno: ")
-    aluno_info = []
     while cont < 4:
         nota = float(input("Digite a nota do aluno: "))
         aluno_nota.append(nota)
@@ -68,11 +72,105 @@ def adicionar_aluno():
     media = calc_media(aluno_nota)
     
     frequencia = int(input("Informe a frequência do aluno em aulas: "))
-    aluno_info = [media, frequencia]
+    carga_hor = int(input("A quantidade de aulas da disciplina: "))
+    aluno_info = [aluno_nota, media, frequencia, carga_hor]
+    
     
     alunos[nome] = aluno_info
+    print("Aluno adicionado")
+
+def editar_aluno():
     print(alunos)
-    print(dicio)
+    nome = input("Informe o nome do aluno para poder editar as informações: ")
 
+    if nome in alunos:
+        dado = int(input('''Qual informação do aluno você deseja alterar? Digite:
+1 -> Alterar nome
+2 -> Alterar nota
+3 -> Alterar média
+4 -> Alterar frequência
+            '''))
+        if dado == 1:
+            alunos[nome] = alunos.pop()
+        if dado == 2:
+            laco = 1
+            while laco == 1:
+                qtd_notas = int(input("Qual nota você deseja editar? "))
+                while qtd_notas > 4:
+                    qtd_notas = int(input("Qual nota você deseja editar? Lembre-se de que os alunos só possuem 4 notas "))
+                    
+                valor = float(input("Informe o valor da nota: "))
+                alunos[nome][0][qtd_notas - 1] = valor
+            
+                laco = int(input('''Deseja editar mais alguma nota? Digite:
+                  1 -> Sim
+                  2 -> Não
+                  '''))
+        if dado == 3:
+            valor = int(input("Informe o valor da média: "))
+            alunos[nome][0][1] = valor
+        if dado == 4:
+            valor = int(input("Informe a nova frequência: "))
+            alunos[aluno_info][0][2] = valor
+    else:
+        print("Aluno não encontrado")
+        nova_op
+    print(alunos)
+    
+def remover_aluno():
+    nome = input("Informe o nome do aluno que deseja remover: ")
+    
+    if nome not in alunos:
+        print("Aluno não encontrado, digite novamente ")
+        remover_aluno()
+    else:
+        removido = alunos.pop(nome)
+        print("Aluno removido")
+    nova_op()
+        
+def gerar_relatorio_aprovados():
+    for aluno, info in alunos.items():
+        #falta adicionar a validação por falta
+        if calc_media(info[0]) > 6:
+            print(f"o {aluno} foi aprovado")
+        else:
+            print("Nenhum aluno foi aprovado")
+            
+    nova_op()
 
+def falta_calc():
+    for aluno, info in alunos.items():
+        print("todo")
+
+def reprovados_falta():
+    for aluno, info in alunos.items():
+        print("todo")
+    print("falta")
+    
+def reprovados_nota():
+    for aluno, info in alunos.items():
+        if calc_media(info[0]) < 7:
+            a = info[0][2]
+            b = info[0][3]
+            print(a)
+            print(b)
+            print(f"O {aluno} foi reprovado")
+    print("nota")
+    
+def nova_op():
+    res = input('''Deseja realizar uma nova operação?
+1 -> Sim
+2 -> Não
+''')
+    if res == 1:
+        validador = True
+        print("nova op true")
+    else:
+        validador = False
+        print("Até breve")
+        print("nova op false")
+
+def situacao_geral():
+    print("todo")
+    
 menu()
