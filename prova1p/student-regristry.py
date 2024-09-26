@@ -191,9 +191,9 @@ def situacao_geral():
     for aluno, info in alunos.items():
         pres = per_cent_presen(info[2])
         if calc_media(info[0]) > 6 and pres >= 75:
-            print(f"{aluno} - nota: {info[1]} / frequência: {info[2]} aulas - (Aprovado)")
+            print(f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Aprovado)")
         elif calc_media(info[0]) < 7 and pres >= 75:
-            print(f"{aluno} - nota: {info[1]} / frequência: {info[2]} aulas - (Reprovado por nota)")
+            print(f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por nota)")
         else:
             print(f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por falta)")
             
