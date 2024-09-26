@@ -15,7 +15,23 @@ Luiz - nota: 6.2 / frequência: 60 aulas - (Reprovado por nota)
 '''
 
 #aluno, notas(4), requencia
-alunos:dict = {}
+alunos:dict = {
+    "Carlos": [
+        [9.4, 8.2],
+        8.8,
+        60.0
+    ],
+    "Jonas": [
+        [6.0, 4.2, 3],
+        4.4,
+        55.0
+    ],
+    "Ulisses": [
+        [8.0, 9.8, 10],
+        9.26,
+        30.0
+    ]
+}
 aluno_info = []
 
 def menu():    
@@ -146,34 +162,41 @@ Digite:
     else:
         removido = alunos.pop(nome)
         print("Aluno removido")
-    menu()
-        
+
+    
+def per_cent_presen(valor):
+    return(valor/60) * 100
+      
 def gerar_relatorio_aprovados():
     for aluno, info in alunos.items():
-        per_cent_presen = (info[2]/60) * 100
-        if calc_media(info[0]) > 6 and per_cent_presen >= 0.75:
-            print(f"{aluno} foi aprovado")
-        else:
-            print("Nenhum aluno foi aprovado")   
-    menu()
+        pres= per_cent_presen(info[2])
+        if calc_media(info[0]) > 6 and pres >= 75:
+            print(f"{aluno} foi aprovado")  
+
 
 def reprovados_falta():
     for aluno, info in alunos.items():
-        per_cent_presen = (info[2]/60) * 100
-        if per_cent_presen < 0.75:
+        pres = per_cent_presen(info[2])
+        if pres < 75:
             print(f"{aluno} reprovado por falta")
-    menu()
+
     
 def reprovados_nota():
     for aluno, info in alunos.items():
         if calc_media(info[0]) < 7:
-            print(f"O {aluno} foi reprovado")
-    menu()
+            print(f"{aluno} reprovou por nota")
+
 
 def situacao_geral():
     for aluno, info in alunos.items():
-        per_cent_presen = (info[2]/60) * 100
-        if calc_media(info[0]) > 6 and per_cent_presen >= 0.75:
-            print(f"{aluno} - nota: {} / frequência")
+        pres = per_cent_presen(info[2])
+        if calc_media(info[0]) > 6 and pres >= 75:
+            print(f"{aluno} - nota: {info[1]} / frequência: {info[2]} aulas - (Aprovado)")
+        elif calc_media(info[0]) < 7 and pres >= 75:
+            print(f"{aluno} - nota: {info[1]} / frequência: {info[2]} aulas - (Reprovado por nota)")
+        else:
+            print(f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por falta)")
+            
+            
     
 menu()
