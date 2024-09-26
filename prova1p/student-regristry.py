@@ -29,7 +29,7 @@ Selecione a operação desejada:
     4 -> Relatório dos alunos aprovados
     5 -> Filtar por Reprovados por falta
     6 -> Filtrar pro reprovados por nota
-    7 -> Situação geral
+    7 -> Relatório geral
     0 -> Sair do programa
     '''))
         
@@ -79,13 +79,13 @@ def editar_aluno():
 
     if nome in alunos:
         dado = int(input('''
-                        Qual informação do aluno você deseja alterar? Digite:
-                        1 -> Alterar nome
-                        2 -> Adicionar nota
-                        3 -> Alterar notas do aluno
-                        4 -> Adicionar média
-                        5 -> Alterar frequência
-                        '''))
+Qual informação do aluno você deseja alterar? Digite:
+    1 -> Alterar nome
+    2 -> Adicionar nota
+    3 -> Alterar notas do aluno
+    4 -> Adicionar média
+    5 -> Alterar frequência
+    '''))
         if dado == 1:
             new_name = input("Informe o novo nome do aluno: ")
             alunos[new_name] = alunos[nome]
@@ -111,10 +111,10 @@ def editar_aluno():
                 alunos[nome][0][qtd_notas - 1] = valor
             
                 laco = int(input('''
-                Deseja editar mais alguma nota? Digite:
-                1 -> Sim
-                2 -> Não
-                  '''))
+Deseja editar mais alguma nota? Digite:
+    1 -> Sim
+    2 -> Não
+    '''))
         elif dado == 4:
             valor = int(input("Informe o valor da média: "))
             alunos[nome][0][1] = valor
@@ -123,7 +123,6 @@ def editar_aluno():
             alunos[nome][2] = valor
     else:
         print("Aluno não encontrado")
-        nova_op
     
 def remover_aluno():
     nome = input("Informe o nome do aluno que deseja remover: ")
@@ -132,11 +131,11 @@ def remover_aluno():
         print(f"Aluno {nome} removido")
     else:
         op = int(input('''
-                "Aluno não encontrado"
-                Deseja tentar outra vez?
-                Digite:
-                1 -> Sim
-                2 -> Não
+Aluno não encontrado
+Deseja tentar outra vez?
+Digite:
+    1 -> Sim
+    2 -> Não
                   '''))
         while op != 2:
             remover_aluno()
@@ -151,35 +150,30 @@ def remover_aluno():
         
 def gerar_relatorio_aprovados():
     for aluno, info in alunos.items():
-        #falta adicionar a validação por falta
-        per_cent_presen = (info[0][2]/60) * 100
-        print(per_cent_presen)
-        if calc_media(info[0]) > 6 and per_cent_presen > 0.75 :
+        per_cent_presen = (info[2]/60) * 100
+        if calc_media(info[0]) > 6 and per_cent_presen >= 0.75:
             print(f"{aluno} foi aprovado")
         else:
             print("Nenhum aluno foi aprovado")   
     menu()
 
-def falta_calc():
-    for aluno, info in alunos.items():
-        print("todo")
-
 def reprovados_falta():
     for aluno, info in alunos.items():
-        a = 1
-    print("falta")
+        per_cent_presen = (info[2]/60) * 100
+        if per_cent_presen < 0.75:
+            print(f"{aluno} reprovado por falta")
+    menu()
     
 def reprovados_nota():
     for aluno, info in alunos.items():
         if calc_media(info[0]) < 7:
-            a = info[0][2]
-            b = info[0][3]
-            print(a)
-            print(b)
             print(f"O {aluno} foi reprovado")
-    print("nota")
+    menu()
 
 def situacao_geral():
-    print("todo")
+    for aluno, info in alunos.items():
+        per_cent_presen = (info[2]/60) * 100
+        if calc_media(info[0]) > 6 and per_cent_presen >= 0.75:
+            print(f"{aluno} - nota: {} / frequência")
     
 menu()
