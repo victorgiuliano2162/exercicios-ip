@@ -173,20 +173,23 @@ def gerar_relatorio_aprovados():
     for aluno, info in alunos.items():
         pres = per_cent_presen(info[2])
         if calc_media(info[0]) > 6 and pres >= 75:
-            print(f"{aluno} foi aprovado")
+            print(
+                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Aprovado)")
 
 
 def reprovados_falta():
     for aluno, info in alunos.items():
         pres = per_cent_presen(info[2])
         if pres < 75:
-            print(f"{aluno} reprovado por falta")
+            print(
+                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por falta)")
 
 
 def reprovados_nota():
     for aluno, info in alunos.items():
         if calc_media(info[0]) < 7:
-            print(f"{aluno} reprovou por nota")
+            print(
+                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por nota)")
 
 
 def situacao_geral():
