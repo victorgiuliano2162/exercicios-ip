@@ -4,6 +4,7 @@ Luiz - nota: 6.2 / frequência: 60 aulas - (Reprovado por nota)
 '''
 
 aluno_info = []
+#dicionário populado para testes
 alunos: dict = {
     "Carlos": [
         [9.4, 8.2],
