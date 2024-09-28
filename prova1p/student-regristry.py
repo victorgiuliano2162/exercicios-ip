@@ -1,20 +1,8 @@
 '''
-- Adição de alunos (solicitar apenas o nome) 
-- Edição de informações de nome do aluno
-- Remoção de aluno existente
-- Adição de notas em aluno existente (no máximo 4 notas)
-- Adição de frequência em aluno existente
-- Impressão de relatório de situação dos alunos. No relatório deve ser usado uma função para calcular a situação do aluno. 
-- Impressão de relatório de uma situação específica (Filtrar por: Aprovado, Reprovado por Falta ou Reprovado por Nota). Nesse caso o usuário precisa informar qual situação que ele planeja filtrar. 
-
-- O programa deve solicitar a carga horária da disciplina
-- o aluno tiver menos que 75% de presença, ele está reprovado por falta
-
 output desejado:
 Luiz - nota: 6.2 / frequência: 60 aulas - (Reprovado por nota)
 '''
 
-# aluno, notas(4), requencia
 aluno_info = []
 alunos: dict = {
     "Carlos": [
@@ -75,25 +63,18 @@ def notas_media(lista):
 
 
 def calc_media(lista):
-    media = sum_nota(lista) / (len(lista))
+    media = sum(lista) / (len(lista))
     return media
-
-
-def sum_nota(l: list):
-    accum = 0
-    for item in l:
-        accum += item
-    return accum
 
 
 def adicionar_aluno():
     nome = input("Informe o nome do aluno: ")
+    #aluno_info = [[], 0, 0]
     alunos[nome] = aluno_info
     print("Aluno adicionado")
 
 
 def editar_aluno():
-    print(alunos)
     nome = input("Informe o nome do aluno para poder editar as informações: ")
     if nome in alunos:
         dado = int(input('''
@@ -103,16 +84,15 @@ Qual informação do aluno você deseja alterar? Digite:
     3 -> Alterar notas do aluno
     4 -> Adicionar média
     5 -> Alterar frequência
-    '''))
+'''))
         if dado == 1:
             new_name = input("Informe o novo nome do aluno: ")
             alunos[new_name] = alunos[nome]
             del alunos[nome]
-            print(alunos)
         elif dado == 2:
             aluno_nota = []
             cont = 1
-            qtd_notas = int(input("Quantas notas você deseja adiconar?"))
+            qtd_notas = int(input("Quantas notas você deseja adiconar? "))
             while cont <= qtd_notas:
                 valor = float(input("Informe o valor da nota: "))
                 aluno_nota.append(valor)
@@ -131,7 +111,7 @@ Qual informação do aluno você deseja alterar? Digite:
 Deseja editar mais alguma nota? Digite:
     1 -> Sim
     2 -> Não
-    '''))
+'''))
         elif dado == 4:
             valor = int(input("Informe o valor da média: "))
             alunos[nome][0][1] = valor
@@ -154,15 +134,9 @@ Deseja tentar outra vez?
 Digite:
     1 -> Sim
     2 -> Não
-                  '''))
+'''))
         while op != 2:
             remover_aluno()
-    if nome not in alunos:
-        print("Aluno não encontrado, digite novamente ")
-        remover_aluno()
-    else:
-        removido = alunos.pop(nome)
-        print("Aluno removido")
 
 
 def per_cent_presen(valor):
@@ -174,7 +148,7 @@ def gerar_relatorio_aprovados():
         pres = per_cent_presen(info[2])
         if calc_media(info[0]) > 6 and pres >= 75:
             print(
-                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Aprovado)")
+                f"{aluno} - nota: {info[1]:.2f} / frequência: {info[2]:.0f} aulas - (Aprovado)")
 
 
 def reprovados_falta():
@@ -182,14 +156,14 @@ def reprovados_falta():
         pres = per_cent_presen(info[2])
         if pres < 75:
             print(
-                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por falta)")
+                f"{aluno} - nota: {info[1]:.2f} / frequência: {info[2]:.0f} aulas - (Reprovado por falta)")
 
 
 def reprovados_nota():
     for aluno, info in alunos.items():
         if calc_media(info[0]) < 7:
             print(
-                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por nota)")
+                f"{aluno} - nota: {info[1]:.2f} / frequência: {info[2]:.0f} aulas - (Reprovado por nota)")
 
 
 def situacao_geral():
@@ -197,13 +171,13 @@ def situacao_geral():
         pres = per_cent_presen(info[2])
         if calc_media(info[0]) > 6 and pres >= 75:
             print(
-                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Aprovado)")
+                f"{aluno} - nota: {info[1]:.2f} / frequência: {info[2]:.0f} aulas - (Aprovado)")
         elif calc_media(info[0]) < 7 and pres >= 75:
             print(
-                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por nota)")
+                f"{aluno} - nota: {info[1]:.2f} / frequência: {info[2]:.0f} aulas - (Reprovado por nota)")
         else:
             print(
-                f"{aluno} - nota: {info[1]} / frequência: {info[2]:.0f} aulas - (Reprovado por falta)")
+                f"{aluno} - nota: {info[1]:.2f} / frequência: {info[2]:.0f} aulas - (Reprovado por falta)")
 
 
 menu()
