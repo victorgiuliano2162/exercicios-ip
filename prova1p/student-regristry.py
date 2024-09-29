@@ -1,8 +1,3 @@
-'''
-output desejado:
-Luiz - nota: 6.2 / frequência: 60 aulas - (Reprovado por nota)
-'''
-
 aluno_info = []
 #dicionário populado para testes
 alunos: dict = {
@@ -54,13 +49,6 @@ Selecione a operação desejada:
         elif entrada == 0:
             print("Até breve")
             break
-
-
-def notas_media(lista):
-    total = 0
-    for item in lista:
-        total += item
-    return total
 
 
 def calc_media(lista):
