@@ -8,7 +8,7 @@ Parar se o valor informado for negativo
 
 output:
 motrar quantidade de notas lidas
-exibir as notas na ordem em ue goram informadas
+exibir as notas na ordem em que foram informadas
 soma das notas
 média das notas
 notas acima da média calculada 

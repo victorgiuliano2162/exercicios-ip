@@ -2,7 +2,7 @@
 
 '''
 informar o número de participantes
-cada participante recebe um valor de 1 a 5
+cada participante recebe um valor de 0 a 5
 
 output:
 Quantos participantes?
@@ -33,7 +33,7 @@ def popular_lista_participante(num):
         print("")
     else:
         while cont <= num:
-            participantes_val.append(random.randint(1, 5))
+            participantes_val.append(random.randint(0, 5))
             cont+=1
         cont = 1
         for part in participantes_val:
@@ -46,13 +46,19 @@ def calc_winner2():
     winner = 1
     while accum != 0:
         accum = accum - 1
-        if winner > contador:
-            winner = 0
-        else:
+        if winner < contador:
             winner+= 1
-            
         if accum == 0:
-            print(f"O vencedor é o participante:a {winner}")
+            print("")
+            print(f"O vencedor é o participante {winner}")
             
 inf_participantes()
 calc_winner2()
+
+
+'''
+[0. 0. 0. 0, 0.]
+
+index out of bonds
+
+'''
