@@ -1,11 +1,11 @@
 saque = int(input("Qual valor você deseja sacar? "))
-cedulas100;
-cedulas50;
-cedulas20;
-cedulas10;
-cedulas5;
-cedulas2;
-cedulas1;
+cedulas100=0
+cedulas50=0
+cedulas20=0
+cedulas10=0
+cedulas5=0
+cedulas2=0
+cedulas1=0
 
 if saque < 1:
     print("Impossível realizar a operação")
